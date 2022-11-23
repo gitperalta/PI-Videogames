@@ -1,0 +1,32 @@
+.container {
+  width: 300px;
+  height: 150px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+}
+
+.genres {
+  height: auto;
+  text-align: left;
+  width: 150px;
+}
+
+.name {
+  text-align: center;
+  width: 300px;
+  height: 20px;
+}
+
+.videogame {
+  width: 300px;
+  border-style: solid;
+  border-radius: 10px;
+  height: auto;
+}
