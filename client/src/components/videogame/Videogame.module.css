@@ -1,32 +1,48 @@
 .container {
-  width: 300px;
-  height: 150px;
+  width: 15em;
+  height: 20em;
+  border-top-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  background: #212121;
+  /* box-shadow: 0.5em 0.5em 1em rgb(25, 25, 25), -0.5em -0.5em 1em rgb(60, 60, 60); */
   display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
-  align-items: center;
-}
-
-.img {
-  width: 100px;
-  height: 100px;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .genres {
   height: auto;
-  text-align: left;
-  width: 150px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  width: 15em;
+  height: auto;
+}
+
+.img {
+  height: 10em;
+  width: 15em;
+  border-bottom-right-radius: 1em;
+}
+
+.detail {
+  text-decoration: none;
+  text-align: center;
+  height: auto;
+  color: aliceblue;
+}
+
+.detail :hover {
+  background-color: aliceblue;
+  color: #040f16;
+  border-style: solid;
+  border-bottom-color: aliceblue;
+  padding-bottom: 1em;
 }
 
 .name {
-  text-align: center;
-  width: 300px;
-  height: 20px;
-}
-
-.videogame {
-  width: 300px;
-  border-style: solid;
-  border-radius: 10px;
-  height: auto;
+  border-top-left-radius: 1em;
+  padding-top: 1em;
 }

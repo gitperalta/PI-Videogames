@@ -1,0 +1,23 @@
+.form {
+  background-color: aliceblue;
+  display: grid;
+  place-content: center;
+  align-content: stretch;
+  justify-content: stretch;
+  gap: 0.5em;
+  min-width: 15em;
+  padding: 2em;
+  border-style: solid;
+  border-radius: 1em;
+}
+
+.page {
+  background-color: #040f16;
+  width: auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}

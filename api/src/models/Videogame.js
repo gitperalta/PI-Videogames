@@ -19,11 +19,11 @@ module.exports = (sequelize) => {
     },
     released: {
       type: DataTypes.STRING,
-      defaultValue: Date().split(" ").slice(0, 4).join(" "),
+      defaultValue: Date().split(" ").slice(1, 4).join(" "),
     },
     rating: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
     },
     platforms: {
       type: Sequelize.ARRAY(Sequelize.TEXT),

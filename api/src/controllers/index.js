@@ -19,7 +19,9 @@ async function getAllVideogames() {
           id: game.id,
           name: game.name,
           background_image: game.background_image,
-          genres: game.genres.map((genre) => genre.name),
+          genres: game.genres.map((genre) => ({ name: genre.name })),
+          platforms: game.platforms.map((element) => element.platform.name),
+          rating: game.rating,
         }));
       });
   });
@@ -64,4 +66,18 @@ function getApiGenres() {
     .catch((error) => new Error(error));
 }
 
-module.exports = { getAllVideogames, getVideogameById, getApiGenres };
+function getPlatforms() {
+  return getAllVideogames()
+    .then((videogames) => videogames.map((game) => game.platforms))
+    .then((platforms) => platforms.flat())
+    .then((platforms) => new Set(platforms))
+    .then((platforms) => Array.from(platforms))
+    .catch((error) => new Error(error));
+}
+
+module.exports = {
+  getAllVideogames,
+  getVideogameById,
+  getApiGenres,
+  getPlatforms,
+};

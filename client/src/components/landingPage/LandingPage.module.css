@@ -1,11 +1,16 @@
 .container {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-height: 100vh;
-  background-image: url("https://images.alphacoders.com/117/1173124.jpg");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  /* background-image: url("https://wallpapercave.com/wp/wp6001987.jpg"); */
+  background-image: url("https://wallpapercave.com/wp/wp7834565.jpg");
   background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+  width: 100%;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }

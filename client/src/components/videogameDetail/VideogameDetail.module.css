@@ -1,0 +1,73 @@
+.detail {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1em;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  gap: 1.5em;
+  color: aliceblue;
+  width: 50%;
+  height: 50%;
+  padding: 1em;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.img {
+  height: 50%;
+  width: 100%;
+  border-top-right-radius: 1em;
+  border-bottom-left-radius: 1em;
+}
+
+.card {
+  height: 100%;
+  width: 60em;
+  border-top-right-radius: 1em;
+  border-bottom-left-radius: 1em;
+  background-color: #212121;
+}
+
+.page {
+  position: static;
+  background-color: rgb(1, 1, 22);
+  min-height: 35.8em;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3em;
+}
+
+.genres_platforms {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  text-align: center;
+  font-size: larger;
+}
+
+.items {
+  display: flex;
+  flex-direction: row;
+  gap: 5em;
+}
+
+.description {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  height: auto;
+  width: 57.5em;
+  text-align: justify;
+}
+
+.list {
+  width: 30em;
+  height: auto;
+}
