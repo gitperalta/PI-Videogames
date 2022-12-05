@@ -29,7 +29,9 @@ videogames.post("/", async (req, res) => {
       req.body;
     let game = await Videogame.create({
       name,
-      background_image,
+      background_image:
+        background_image ||
+        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gridoffset-videogames-1-1585583517.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*",
       rating,
       platforms,
       description,

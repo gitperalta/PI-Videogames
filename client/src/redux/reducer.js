@@ -20,16 +20,16 @@ export default function rootReducer(state = initialState, action) {
         orderedAux: action.data,
       };
     case "FIND_VIDEOGAME":
-      action.data.forEach((element) => {
-        for (const game of videogamesAux) {
-          element.id === game.id && filtered.push(element);
-        }
-      });
+      // action.data.forEach((element) => {
+      //   for (const game of videogamesAux) {
+      //     element.id === game.id && filtered.push(element);
+      //   }
+      // });
 
       return {
         ...state,
         videogamesAux: videogamesAux,
-        videogames: filtered,
+        videogames: action.data,
       };
     case "VIDEOGAME_DETAIL":
       return {

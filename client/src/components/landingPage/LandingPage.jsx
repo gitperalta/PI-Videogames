@@ -7,7 +7,7 @@ export default function LandingPage() {
     <div className={styles.container}>
       <div>
         <Link to="/home">
-          <input type="button" value="Home" style={{ cursor: "pointer" }} />
+          <input type="button" value="START" style={{ cursor: "pointer" }} />
         </Link>
       </div>
     </div>

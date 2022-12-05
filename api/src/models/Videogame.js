@@ -20,6 +20,7 @@ module.exports = (sequelize) => {
     released: {
       type: DataTypes.STRING,
       defaultValue: Date().split(" ").slice(1, 4).join(" "),
+      allowNull: false,
     },
     rating: {
       type: DataTypes.INTEGER,

@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByGenres, getGenres } from "../../redux/actions";
+import styles from "./FilterByGenres.module.css";
 
-export default function FilterByGenres() {
+export default function FilterByGenres({ setPage }) {
   const errorFilter = useSelector((state) => state.errorFilter);
   const genres = useSelector((state) => state.genres);
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export default function FilterByGenres() {
     if (!filters.includes(e.target.value)) {
       filters.push(e.target.value);
       dispatch(filterByGenres(e.target.value));
+      setPage(1);
     }
     console.log(filters);
   };
@@ -35,7 +37,11 @@ export default function FilterByGenres() {
         Genres:
         <br />
         {errorFilter && <span>No videogames</span>}
-        <select id="genres" onChange={(e) => handleOnChange(e)}>
+        <select
+          id="genres"
+          onChange={(e) => handleOnChange(e)}
+          className={styles.genres}
+        >
           <option>All </option>
           {genres.map((genre) => (
             <option value={genre.name} key={genre.id}>
@@ -43,12 +49,15 @@ export default function FilterByGenres() {
             </option>
           ))}
         </select>
-        <input
+        <button className={styles.button} onClick={(e) => handleOnClick(e)}>
+          {/* <input
           type="button"
           value="    X    "
           style={{ cursor: "pointer" }}
           onClick={(e) => handleOnClick(e)}
-        />
+        /> */}
+          x
+        </button>
         <br />
         {filters.length > 0 &&
           filters.map((filter) => (

@@ -14,14 +14,45 @@ export default function CreateVideogame() {
   const dispatch = useDispatch();
   const [formPlatforms, setPlatforms] = useState([]);
   const [formGenres, setGenres] = useState([]);
-  const [form, setForm] = useState({
-    name: "",
-    background_image: "",
-    platforms: [],
-    description: "",
-    rating: null,
-    genres: [],
-  });
+  const [form, setForm] = useState({});
+  const [error, setError] = useState({});
+
+  const validationName = (e) => {
+    if (!/([A-Z])\w+/g.test(e.target.value)) {
+      error.name = "The name must start with a capital letter.";
+    } else {
+      error.name = null;
+    }
+  };
+
+  const validationRating = (e) => {
+    if (!/[1-5]/.test(e.target.value)) {
+      error.rating = "Rate the game with numbers between 1 and 5.";
+    } else {
+      error.rating = null;
+    }
+  };
+
+  const validationDescription = (e) => {
+    if (!/([A-Z])\w+/g.test(e.target.value)) {
+      error.description =
+        "The game must have a description starting with a capital letter.";
+    } else {
+      error.description = null;
+    }
+  };
+
+  const validationPlatforms = () => {
+    if (formPlatforms.length === 1) {
+      error.platforms = "The game must have at least one platform.";
+    }
+  };
+
+  const validationGenres = () => {
+    if (formGenres.length === 1) {
+      error.genres = "The game must have at least one genre.";
+    }
+  };
 
   useEffect(() => {
     dispatch(getAllPlatforms());
@@ -30,52 +61,90 @@ export default function CreateVideogame() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(postVideogame(form));
-    console.log(form);
-    return history("/home");
+    if (
+      !error.name ||
+      !error.platforms ||
+      !error.genres ||
+      !error.description
+    ) {
+      error.error = "Set the require inputs: *";
+    } else {
+      dispatch(postVideogame(form));
+      return history("/home");
+    }
   };
 
   const handleName = (e) => {
     e.preventDefault();
-    setForm({ ...form, name: e.target.value });
+    validationName(e);
+    setForm({
+      ...form,
+      name: e.target.value,
+    });
   };
 
   const handleBackgroundImage = (e) => {
     e.preventDefault();
-    setForm({ ...form, background_image: e.target.value });
+    setForm({
+      ...form,
+      background_image: e.target.value,
+    });
   };
 
   const handlePlatforms = (e) => {
     e.preventDefault();
-    if (!formPlatforms.find((platform) => platform === e.target.value)) {
+    error.platforms = null;
+    if (
+      !formPlatforms.includes(e.target.value) &&
+      e.target.value !== "select_platforms"
+    ) {
       formPlatforms.push(e.target.value);
-      setForm({ ...form, platforms: formPlatforms });
+      setForm({
+        ...form,
+        platforms: formPlatforms,
+      });
     }
   };
 
   const handleRating = (e) => {
     e.preventDefault();
-    setForm({ ...form, rating: e.target.value });
-    console.log(form);
+    validationRating(e);
+    setForm({
+      ...form,
+      rating: e.target.value,
+    });
+    console.log(form, form.name);
   };
 
   const handleGenres = (e) => {
     e.preventDefault();
-    if (!formPlatforms.includes(e.target.value)) {
+    error.genres = null;
+    if (
+      !formPlatforms.includes(e.target.value) &&
+      e.target.value !== "select_genres"
+    ) {
       formGenres.push(e.target.value);
-      setForm({ ...form, genres: formGenres });
+      setForm({
+        ...form,
+        genres: formGenres,
+      });
     }
   };
 
   const handleDescription = (e) => {
     e.preventDefault();
-    setForm({ ...form, description: e.target.value });
+    validationDescription(e);
+    setForm({
+      ...form,
+      description: e.target.value,
+    });
     console.log(form);
   };
 
   const handleGenresX = (e) => {
     e.preventDefault();
     setGenres(formGenres.filter((genre) => genre !== e.target.value));
+    validationGenres();
   };
 
   const handlePlatformsX = (e) => {
@@ -83,6 +152,7 @@ export default function CreateVideogame() {
     setPlatforms(
       formPlatforms.filter((platform) => platform !== e.target.value)
     );
+    validationPlatforms();
   };
 
   return (
@@ -90,18 +160,21 @@ export default function CreateVideogame() {
       <Bar />
       <div className={styles.page}>
         <form onSubmit={(e) => handleOnSubmit(e)} className={styles.form}>
-          {/* <h2>Create Videogame</h2> */}
-          <label htmlFor="name">Name: </label>
+          <label htmlFor="name">
+            Name <span className={styles.asterisco}>*</span>
+          </label>
+          {error.name && <span className={styles.asterisco}>{error.name}</span>}
           <input type="text" id="name" onChange={(e) => handleName(e)} />
-
-          <label htmlFor="background_image">Background Image:</label>
+          <label htmlFor="background_image">Background Image</label>
           <input
             type="text"
             id="background_image"
             onChange={(e) => handleBackgroundImage(e)}
           />
-
           <label htmlFor="rating">Rating:</label>
+          {error.rating && (
+            <span className={styles.asterisco}>{error.rating}</span>
+          )}
           <input
             type="number"
             id="rating"
@@ -110,8 +183,12 @@ export default function CreateVideogame() {
             max="5"
             placeholder="1-5"
           />
-
-          <label htmlFor="platforms">Platforms:</label>
+          <label htmlFor="platforms">
+            Platforms<span className={styles.asterisco}>*</span>
+          </label>
+          {error.platforms && (
+            <span className={styles.asterisco}> {error.platforms} </span>
+          )}
           <select
             id="platforms"
             onChange={(e) => {
@@ -129,7 +206,7 @@ export default function CreateVideogame() {
           {formPlatforms.length > 0 &&
             formPlatforms.map((platform) => (
               <span key={platform}>
-                · {platform}{" "}
+                · {platform}
                 <button
                   key={platform}
                   value={platform}
@@ -139,7 +216,12 @@ export default function CreateVideogame() {
                 </button>
               </span>
             ))}
-          <label htmlFor="genres">Genres: </label>
+          <label htmlFor="genres">
+            Genres<span className={styles.asterisco}>*</span>
+          </label>
+          {error.genres && (
+            <span className={styles.asterisco}> {error.genres} </span>
+          )}
           <select id="genres" onChange={(e) => handleGenres(e)}>
             <option value="select_genres">Select genres...</option>
             {genres.length > 0 &&
@@ -152,20 +234,32 @@ export default function CreateVideogame() {
           {formGenres.length > 0 &&
             formGenres.map((genre) => (
               <span key={genre}>
-                · {genre}{" "}
+                · {genre}
                 <button value={genre} onClick={(e) => handleGenresX(e)}>
                   x
                 </button>
               </span>
             ))}
-          <label htmlFor="description">Description: </label>
+          <label htmlFor="description">
+            Description<span className={styles.asterisco}>*</span>
+          </label>
+          {error.description && (
+            <span className={styles.asterisco}>{error.description}</span>
+          )}
           <textarea
             id="description"
             placeholder="Describe the videogame..."
             onChange={(e) => handleDescription(e)}
-            rows="5"
+            rows="10"
+            cols="30"
           ></textarea>
-          <input type="submit" />
+          {!error.name &&
+            !error.description &&
+            !error.platforms &&
+            !error.genres && (
+              <input type="submit" style={{ cursor: "pointer" }} />
+            )}
+          <span className={styles.asterisco}>{error.error}</span>
         </form>
       </div>
     </>

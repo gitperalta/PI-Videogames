@@ -1,0 +1,32 @@
+.button {
+  background-color: #eee;
+  border: none;
+  font-size: 1rem;
+  border-radius: 0.1em;
+  color: lightcoral;
+  box-shadow: 0 0.4rem #dfd9d9;
+  cursor: pointer;
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.button:active {
+  color: white;
+  box-shadow: 0 0.2rem #dfd9d9;
+  transform: translateY(0.2rem);
+}
+
+.button:hover:not(:disabled) {
+  background: lightcoral;
+  color: white;
+  text-shadow: 0 0.1rem #bcb4b4;
+}
+
+.button:disabled {
+  cursor: auto;
+  color: grey;
+}
+
+.genres {
+  width: 13.8em;
+}

@@ -15,14 +15,31 @@ import styles from "./Home.module.css";
 
 export default function Home() {
   const videogames = useSelector((state) => state.videogames);
-  const findAux = useSelector((state) => state.findAux);
   const dispatch = useDispatch();
   const [orderName, setOrderName] = useState("");
   const [orderRating, setOrderRating] = useState("");
+  const [page, setPage] = useState(1);
+  const videogamesPerPage = 15;
+  const lastIndex = page * videogamesPerPage;
+  const firstIndex = lastIndex - videogamesPerPage;
+  const pageVideogames = videogames.slice(firstIndex, lastIndex);
+  const pagesNumber = Math.ceil(videogames.length / 15);
+  const pages = [];
+  for (let i = 1; i <= pagesNumber; i++) {
+    pages.push([i]);
+  }
+  console.log(videogames);
 
   useEffect(() => {
-    dispatch(getAllVideogames());
+    if (videogames.length === 0) {
+      dispatch(getAllVideogames());
+    }
   }, [dispatch]);
+
+  const handlePageChange = (e, page) => {
+    setPage(page);
+    console.log(videogames);
+  };
 
   const handleOrderName = (e) => {
     setOrderName(e.target.id);
@@ -36,7 +53,8 @@ export default function Home() {
 
   const handleOnSearch = (e) => {
     dispatch(findVideogame(e.target.value));
-    console.log(findAux);
+    setPage(1);
+    console.log(videogames);
   };
 
   return (
@@ -56,8 +74,8 @@ export default function Home() {
           </label>
           <div className={styles.filters}>
             <div className={styles.titles}>Filters</div>
-            <FilterByGenres />
-            <FilterByOrigin />
+            <FilterByGenres setPage={setPage} />
+            <FilterByOrigin setPage={setPage} />
           </div>
           <div className={styles.items}>
             <div className={styles.titles}>Orders</div>
@@ -109,9 +127,20 @@ export default function Home() {
             </div>
           </div>
         </nav>
-        <div className={styles.container}>
-          {videogames.length > 0 ? (
-            videogames.map((game) => (
+        <div className={styles.number}>
+          <div className={styles.paging}>
+            {videogames.length > 0 &&
+              pages.map((page) => (
+                <button key={page} onClick={(e) => handlePageChange(e, page)}>
+                  {page}
+                </button>
+              ))}
+          </div>
+        </div>
+        <div></div>
+        {videogames.length > 0 ? (
+          <div className={styles.container}>
+            {pageVideogames.map((game) => (
               <Videogame
                 id={game.id}
                 key={game.id}
@@ -119,11 +148,26 @@ export default function Home() {
                 background_image={game.background_image}
                 genres={game.genres}
               />
-            ))
-          ) : (
-            <h1>Loading...</h1>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className={styles.all}>
+            <div className={styles.loader}>
+              <div className={styles.bar1}></div>
+              <div className={styles.bar2}></div>
+              <div className={styles.bar3}></div>
+              <div className={styles.bar4}></div>
+              <div className={styles.bar5}></div>
+              <div className={styles.bar6}></div>
+              <div className={styles.bar7}></div>
+              <div className={styles.bar8}></div>
+              <div className={styles.bar9}></div>
+              <div className={styles.bar10}></div>
+              <div className={styles.bar11}></div>
+              <div className={styles.bar12}></div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

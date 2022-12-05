@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByOrigin, getAllVideogames } from "../../redux/actions";
 
-export default function FilterByOrigin() {
+export default function FilterByOrigin({ setPage }) {
   const dispatch = useDispatch();
   const videogames = useSelector((state) => state.videogames);
 
@@ -11,6 +11,7 @@ export default function FilterByOrigin() {
     e.target.value === "select"
       ? dispatch(getAllVideogames())
       : dispatch(filterByOrigin(e.target.value));
+    setPage(1);
     console.log(videogames);
   };
 
