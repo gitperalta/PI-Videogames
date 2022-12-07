@@ -36,9 +36,15 @@ export default function Home() {
     }
   }, [dispatch]);
 
-  const handlePageChange = (e, page) => {
-    setPage(page);
-    console.log(videogames);
+  const handlePageChange = (newPage, paging) => {
+    if (newPage) {
+      setPage(newPage[0]);
+    } else if (page !== pagesNumber && paging === "+") {
+      setPage(page + 1);
+    } else if (page !== 1 && paging === "-") {
+      setPage(page - 1);
+    }
+    console.log(page);
   };
 
   const handleOrderName = (e) => {
@@ -128,27 +134,52 @@ export default function Home() {
           </div>
         </nav>
         <div className={styles.number}>
-          <div className={styles.paging}>
-            {videogames.length > 0 &&
-              pages.map((page) => (
-                <button key={page} onClick={(e) => handlePageChange(e, page)}>
-                  {page}
+          {videogames.length > 0 && (
+            <div className={styles.paging}>
+              {pages.length > 1 && (
+                <button
+                  id="-"
+                  onClick={(e) => handlePageChange(null, e.target.id)}
+                  className={styles.font}
+                >
+                  PREV
+                </button>
+              )}
+              {pages.map((newPage) => (
+                <button
+                  key={newPage}
+                  onClick={() => handlePageChange(newPage)}
+                  className={styles.font}
+                >
+                  {newPage}
                 </button>
               ))}
-          </div>
+              {pages.length > 1 && (
+                <button
+                  id="+"
+                  onClick={(e) => handlePageChange(null, e.target.id)}
+                  className={styles.font}
+                >
+                  NEXT
+                </button>
+              )}
+            </div>
+          )}
         </div>
-        <div></div>
         {videogames.length > 0 ? (
-          <div className={styles.container}>
-            {pageVideogames.map((game) => (
-              <Videogame
-                id={game.id}
-                key={game.id}
-                name={game.name}
-                background_image={game.background_image}
-                genres={game.genres}
-              />
-            ))}
+          <div>
+            <div className={styles.pageNumberTop}>page: {page}</div>
+            <div className={styles.container}>
+              {pageVideogames.map((game) => (
+                <Videogame
+                  id={game.id}
+                  key={game.id}
+                  name={game.name}
+                  background_image={game.background_image}
+                  genres={game.genres}
+                />
+              ))}
+            </div>
           </div>
         ) : (
           <div className={styles.all}>

@@ -16,6 +16,7 @@ export default function CreateVideogame() {
   const [formGenres, setGenres] = useState([]);
   const [form, setForm] = useState({});
   const [error, setError] = useState({});
+  const [selectPlatform, setSelectPlatform] = useState(false);
 
   const validationName = (e) => {
     if (!/([A-Z])\w+/g.test(e.target.value)) {
@@ -253,13 +254,14 @@ export default function CreateVideogame() {
             rows="10"
             cols="30"
           ></textarea>
+          <span className={styles.asterisco}>{error.error}</span>
           {!error.name &&
+            !error.rating &&
             !error.description &&
             !error.platforms &&
             !error.genres && (
               <input type="submit" style={{ cursor: "pointer" }} />
             )}
-          <span className={styles.asterisco}>{error.error}</span>
         </form>
       </div>
     </>

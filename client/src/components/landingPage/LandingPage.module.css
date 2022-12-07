@@ -2,7 +2,7 @@
   position: absolute;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   background-image: url("https://wallpapercave.com/wp/wp7390812.jpg");
   background-position: center;
@@ -12,4 +12,18 @@
   height: 100%;
   width: 100%;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: aliceblue;
+}
+
+.button {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  cursor: pointer;
+  background-color: aliceblue;
+  margin-bottom: 10em;
+}
+
+.div {
+  margin-top: 5em;
+  font-size: large;
+  text-align: center;
 }

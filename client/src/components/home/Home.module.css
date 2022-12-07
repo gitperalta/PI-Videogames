@@ -1,6 +1,5 @@
 .container {
   margin-left: 15em;
-  margin-top: 3em;
   padding-top: 1em;
   display: flex;
   flex-direction: row;
@@ -218,4 +217,19 @@
   width: 85vw;
   height: 80vh;
   position: relative;
+}
+
+.pageNumberTop {
+  margin-top: 5em;
+  margin-left: 17.5em;
+}
+
+.pageNumberButton {
+  bottom: 0%;
+}
+
+.font {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: aliceblue;
+  cursor: pointer;
 }
