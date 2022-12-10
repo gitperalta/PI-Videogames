@@ -20,16 +20,17 @@ export default function rootReducer(state = initialState, action) {
         orderedAux: action.data,
       };
     case "FIND_VIDEOGAME":
-      // action.data.forEach((element) => {
-      //   for (const game of videogamesAux) {
-      //     element.id === game.id && filtered.push(element);
-      //   }
-      // });
-
+      videogamesAux.forEach((game) => {
+        for (const find of action.data) {
+          if (game.id === find.id) {
+            filtered.push(find);
+          }
+        }
+      });
       return {
         ...state,
         videogamesAux: videogamesAux,
-        videogames: action.data,
+        videogames: filtered,
       };
     case "VIDEOGAME_DETAIL":
       return {
@@ -112,9 +113,9 @@ export default function rootReducer(state = initialState, action) {
     case "ORDER_BY_RATING":
       if (action.order === "up") {
         filtered = videogames.sort((a, b) => {
-          if (a.rating > b.rating) {
+          if (a.rating < b.rating) {
             return 1;
-          } else if (b.rating > a.rating) {
+          } else if (b.rating < a.rating) {
             return -1;
           } else {
             return 0;
@@ -122,9 +123,9 @@ export default function rootReducer(state = initialState, action) {
         });
       } else if (action.order === "down") {
         filtered = videogames.sort((a, b) => {
-          if (a.rating > b.rating) {
+          if (a.rating < b.rating) {
             return -1;
-          } else if (b.rating > a.rating) {
+          } else if (b.rating < a.rating) {
             return 1;
           } else {
             return 0;

@@ -16,10 +16,11 @@ export default function CreateVideogame() {
   const [formGenres, setGenres] = useState([]);
   const [form, setForm] = useState({});
   const [error, setError] = useState({});
-  const [selectPlatform, setSelectPlatform] = useState(false);
 
   const validationName = (e) => {
-    if (!/([A-Z])\w+/g.test(e.target.value)) {
+    if (e.target.value.length > 250) {
+      error.name = "The name characters are way to many";
+    } else if (!/([A-Z])\w+/g.test(e.target.value)) {
       error.name = "The name must start with a capital letter.";
     } else {
       error.name = null;
@@ -62,17 +63,8 @@ export default function CreateVideogame() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    if (
-      !error.name ||
-      !error.platforms ||
-      !error.genres ||
-      !error.description
-    ) {
-      error.error = "Set the require inputs: *";
-    } else {
-      dispatch(postVideogame(form));
-      return history("/home");
-    }
+    dispatch(postVideogame(form));
+    return history(`/home`);
   };
 
   const handleName = (e) => {

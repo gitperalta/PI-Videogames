@@ -1,7 +1,11 @@
 const { Router } = require("express");
-const { getAllVideogames } = require("../controllers/index.js");
+const {
+  getAllVideogames,
+  deleteVideogame,
+} = require("../controllers/index.js");
 const videogame = Router();
 const { getVideogameById } = require("../controllers");
+const { Videogame } = require("../db.js");
 
 videogame.get("/:id", async (req, res) => {
   try {

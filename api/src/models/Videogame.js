@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
     },
     rating: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     platforms: {
       type: Sequelize.ARRAY(Sequelize.TEXT),

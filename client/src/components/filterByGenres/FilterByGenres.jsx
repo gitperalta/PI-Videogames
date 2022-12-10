@@ -50,12 +50,6 @@ export default function FilterByGenres({ setPage }) {
           ))}
         </select>
         <button className={styles.button} onClick={(e) => handleOnClick(e)}>
-          {/* <input
-          type="button"
-          value="    X    "
-          style={{ cursor: "pointer" }}
-          onClick={(e) => handleOnClick(e)}
-        /> */}
           x
         </button>
         <br />

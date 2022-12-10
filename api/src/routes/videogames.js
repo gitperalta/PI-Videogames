@@ -13,13 +13,17 @@ videogames.get("/", async (req, res) => {
           game.name.toLowerCase().includes(name.toLowerCase())
         )
       );
-      res.status(200).send(games);
+      if (games.length === 0) {
+        res.status(400).send("Videogame not found");
+      } else {
+        res.status(200).send(games);
+      }
     } else {
       games = await getAllVideogames();
       res.status(200).send(games);
     }
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400);
   }
 });
 
@@ -41,10 +45,10 @@ videogames.post("/", async (req, res) => {
         name: genres,
       },
     });
-    console.log(genresDb);
-    game.addGenre(genresDb);
-    res.status(200).send(game);
+    await game.addGenre(genresDb);
+    res.status(200).send("Videogame created successfully");
   } catch (error) {
+    console.log(error.message);
     res.status(400).send(error.message);
   }
 });

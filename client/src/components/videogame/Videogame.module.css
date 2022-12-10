@@ -10,7 +10,8 @@
   border-radius: 30px;
   background-color: #212121;
   color: aliceblue;
-  box-shadow: 0.5em 0.5em 1em rgb(25, 25, 25), -0.5em -0.5em 1em rgb(60, 60, 60);
+  border-style: solid;
+  border-color: #212121;
 }
 
 .genres {

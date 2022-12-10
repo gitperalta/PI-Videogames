@@ -19,7 +19,8 @@ export function findVideogame(payload) {
     return axios
       .get(`http://localhost:3001/videogames?name=${payload}`)
       .then((json) => json.data)
-      .then((data) => dispatch({ type: "FIND_VIDEOGAME", data }));
+      .then((data) => dispatch({ type: "FIND_VIDEOGAME", data }))
+      .catch((error) => alert(error.response.data));
   };
 }
 
@@ -64,7 +65,16 @@ export function getAllPlatforms() {
 
 export function postVideogame(form) {
   return function (dispatch) {
-    return axios.post("http://localhost:3001/videogames", form);
+    return axios
+      .post("http://localhost:3001/videogames", form)
+      .then((data) => {
+        axios("http://localhost:3001/videogames")
+          .then((json) => json.data)
+          .then((data) => dispatch({ type: "GET_ALL_VIDEOGAMES", data }));
+        return data;
+      })
+      .then((data) => alert(data.data))
+      .catch((error) => alert(error.message));
   };
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Bar from "../../bar/Bar";
 import {
   findVideogame,
@@ -14,6 +15,7 @@ import Videogame from "../videogame/Videogame";
 import styles from "./Home.module.css";
 
 export default function Home() {
+  const history = useNavigate();
   const videogames = useSelector((state) => state.videogames);
   const dispatch = useDispatch();
   const [orderName, setOrderName] = useState("");
@@ -24,6 +26,7 @@ export default function Home() {
   const firstIndex = lastIndex - videogamesPerPage;
   const pageVideogames = videogames.slice(firstIndex, lastIndex);
   const pagesNumber = Math.ceil(videogames.length / 15);
+  const post = useSelector((state) => state.post);
   const pages = [];
   for (let i = 1; i <= pagesNumber; i++) {
     pages.push([i]);
@@ -31,6 +34,10 @@ export default function Home() {
   console.log(videogames);
 
   useEffect(() => {
+    if (post === true) {
+      dispatch(getAllVideogames());
+      console.log("esto es");
+    }
     if (videogames.length === 0) {
       dispatch(getAllVideogames());
     }

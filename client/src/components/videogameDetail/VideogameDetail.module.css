@@ -19,8 +19,8 @@
 .img {
   height: 50%;
   width: 100%;
-  border-top-right-radius: 1em;
-  border-bottom-left-radius: 1em;
+  border-top-right-radius: 27px;
+  border-bottom-left-radius: 27px;
 }
 
 .card {
@@ -28,11 +28,10 @@
   margin-bottom: 2em;
   height: auto;
   width: 60em;
-  border-top-right-radius: 1em;
-  border-bottom-left-radius: 1em;
   border-radius: 30px;
   background: #212121;
-  box-shadow: 0.5em 0.5em 1em rgb(25, 25, 25), -0.5em -0.5em 1em rgb(60, 60, 60);
+  border-style: solid;
+  border-color: rgb(240, 248, 255, 0.75);
 }
 
 .page {
