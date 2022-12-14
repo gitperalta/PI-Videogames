@@ -3,7 +3,7 @@ import axios from "axios";
 export function getAllVideogames() {
   return function (dispatch) {
     return axios
-      .get("http://localhost:3001/videogames")
+      .get("/videogames")
       .then((json) => json.data)
       .then((data) =>
         dispatch({
@@ -17,7 +17,7 @@ export function getAllVideogames() {
 export function findVideogame(payload) {
   return function (dispatch) {
     return axios
-      .get(`http://localhost:3001/videogames?name=${payload}`)
+      .get(`/videogames?name=${payload}`)
       .then((json) => json.data)
       .then((data) => dispatch({ type: "FIND_VIDEOGAME", data }))
       .catch((error) => alert(error.response.data));
@@ -27,7 +27,7 @@ export function findVideogame(payload) {
 export function videogameDetail(id) {
   return function (dispatch) {
     return axios
-      .get(`http://localhost:3001/videogame/${id}`)
+      .get(`/videogame/${id}`)
       .then((json) => json.data)
       .then((data) => dispatch({ type: "VIDEOGAME_DETAIL", data }));
   };
@@ -36,7 +36,7 @@ export function videogameDetail(id) {
 export function getGenres() {
   return function (dispatch) {
     return axios
-      .get("http://localhost:3001/genres")
+      .get("/genres")
       .then((json) => json.data)
       .then((data) => dispatch({ type: "GET_GENRES", data }));
   };
@@ -57,7 +57,7 @@ export function filterByOrigin(filter) {
 export function getAllPlatforms() {
   return function (dispatch) {
     return axios
-      .get("http://localhost:3001/platforms")
+      .get("/platforms")
       .then((json) => json.data)
       .then((data) => dispatch({ type: "GET_ALL_PLATFORMS", data }));
   };
@@ -66,9 +66,9 @@ export function getAllPlatforms() {
 export function postVideogame(form) {
   return function (dispatch) {
     return axios
-      .post("http://localhost:3001/videogames", form)
+      .post("/videogames", form)
       .then((data) => {
-        axios("http://localhost:3001/videogames")
+        axios("/videogames")
           .then((json) => json.data)
           .then((data) => dispatch({ type: "GET_ALL_VIDEOGAMES", data }));
         return data;
