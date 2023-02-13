@@ -108,7 +108,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         videogamesAux: videogamesAux,
-        videogames: action.order === "default" ? orderedAux : filtered,
+        videogames: action.order === "default" ? state.orderedAux : filtered,
       };
     case "ORDER_BY_RATING":
       if (action.order === "up") {
