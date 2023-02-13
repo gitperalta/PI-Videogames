@@ -7,7 +7,7 @@ import CreateVideogame from "./components/createVideogame/CreateVideogame.jsx";
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:3001";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -20,4 +20,4 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
