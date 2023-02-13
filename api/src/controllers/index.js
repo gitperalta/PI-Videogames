@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { Videogame, Genre } = require("../db.js");
+require("dotenv").config();
 
 async function getAllVideogames() {
   let links = [];
