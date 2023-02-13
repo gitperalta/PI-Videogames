@@ -5,7 +5,7 @@ import Home from "./components/home/Home.jsx";
 import VideogameDetail from "./components/videogameDetail/VideogameDetail.jsx";
 import CreateVideogame from "./components/createVideogame/CreateVideogame.jsx";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = process.env.BACK_URL;
 
 export default function App() {
   return (
