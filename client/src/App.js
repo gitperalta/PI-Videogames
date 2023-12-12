@@ -5,8 +5,7 @@ import Home from "./components/home/Home.jsx";
 import VideogameDetail from "./components/videogameDetail/VideogameDetail.jsx";
 import CreateVideogame from "./components/createVideogame/CreateVideogame.jsx";
 import axios from "axios";
-axios.defaults.baseURL =
-  "https://pi-videogames-production-a301.up.railway.app/";
+axios.defaults.baseURL = "https://pi-server-3ppt.onrender.com/";
 
 export default function App() {
   return (
